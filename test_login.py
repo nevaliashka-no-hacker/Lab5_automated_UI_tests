@@ -11,12 +11,12 @@ def test_successful_login(page: Page):
     page.locator('[data-test="username"]').fill("standard_user") 
     page.locator('[data-test="password"]').fill("secret_sauce") 
     page.locator('[data-test="login-button"]').click() 
-    # expect(page).to_have_url( 
-    #     "https://www.saucedemo.com/inventory.html" 
-    # ) 
     expect(page).to_have_url( 
-        "https://www.saucedemo.com/incorrect.html" 
-    )
+        "https://www.saucedemo.com/inventory.html" 
+    ) 
+    # expect(page).to_have_url( 
+    #     "https://www.saucedemo.com/incorrect.html" 
+    # )
     expect( 
         page.locator('[data-test="inventory-container"]') 
     ).to_be_visible()
