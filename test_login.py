@@ -34,6 +34,25 @@ def test_add_product_to_cart(page: Page):
         page.locator('[data-test="shopping-cart-badge"]') 
     ).to_have_text("1") 
 
+def test_product_is_displayed_in_cart(page: Page):
+    page.goto("https://www.saucedemo.com/")
+    page.locator('[data-test="username"]').fill("standard_user")
+    page.locator('[data-test="password"]').fill("secret_sauce")
+    page.locator('[data-test="login-button"]').click()
+    page.locator(
+        '[data-test="add-to-cart-sauce-labs-backpack"]'
+    ).click()
+    expect(
+        page.locator('[data-test="shopping-cart-badge"]')
+    ).to_have_text("1")
+    page.locator('[data-test="shopping-cart-link"]').click()
+    expect(page).to_have_url(
+        "https://www.saucedemo.com/cart.html"
+    )
+    expect(
+        page.locator('[data-test="inventory-item-name"]')
+    ).to_have_text("Sauce Labs Backpack")
+
 def test_login_with_invalid_password(page: Page): 
     page.goto("https://www.saucedemo.com/") 
  
